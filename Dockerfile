@@ -1,9 +1,8 @@
 FROM mysql
-COPY . .
-EXPOSE 1433
+EXPOSE 3306
 RUN apt-get update && apt-get install -y wget
-ENV sa_password=test
+
+ADD init.sql /docker-entrypoint-initdb.d
+
 ENV ACCEPT_EULA=Y
 ENV MYSQL_ALLOW_EMPTY_PASSWORD=true
-
-#ENTRYPOINT ["sh", "-c", "mysql -u sa -test my_databse < bdd.sql"]
